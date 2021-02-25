@@ -1,15 +1,17 @@
 // ==UserScript==
 // @name          MusicBrainz auto tagger button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.1.0
+// @version       0.2.0
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @icon          https://staticbrainz.org/MB/mblookup-tagger-b8fe559.png
 // @match         https://*.musicbrainz.org/release-group/*
 // @match         https://*.musicbrainz.org/release/*
 // @match         https://*.musicbrainz.org/recording/*
+// @match         https://*.musicbrainz.org/cdtoc/*
 // @include       /^https://*.musicbrainz.org/search/
 // @exclude       /^https://([.*].)?musicbrainz.org/release-group/.*/.*/
+// @exclude       /^https://([.*].)?musicbrainz.org/cdtoc/.*/.*/
 // @grant         none
 // @inject-into   content
 // @homepageURL   https://github.com/phw/musicbrainz-auto-tagger-button
