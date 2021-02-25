@@ -1,0 +1,28 @@
+{
+  "name": "mb-auto-tagger-button",
+  "version": "0.1.0",
+  "description": "User script to automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running",
+  "main": "mb-auto-tagger-button.js",
+  "type": "git",
+  "repository": {
+    "url": "git+ssh://git@github.com/phw/musicbrainz-auto-tagger-button.git"
+  },
+  "author": "Philipp Wolfer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/phw/musicbrainz-auto-tagger-button/issues"
+  },
+  "homepage": "https://github.com/phw/musicbrainz-auto-tagger-button#readme",
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-cli": "^1.1.1",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "standard": "^16.0.3"
+  },
+  "scripts": {
+    "test": "eslint \"*.js\""
+  }
+}
