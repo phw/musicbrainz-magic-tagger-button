@@ -13,7 +13,7 @@
 // @grant         none
 // @inject-into   content
 // @homepageURL   https://github.com/phw/musicbrainz-auto-tagger-button
-// @downloadURL   https://raw.githubusercontent.com/phw/musicbrainz-auto-tagger-button/main/mb-auto-tagger-button.js
+// @downloadURL   https://raw.githubusercontent.com/phw/musicbrainz-auto-tagger-button/main/mb-auto-tagger-button.user.js
 // ==/UserScript==
 
 const PICARD_URL = 'http://127.0.0.1'

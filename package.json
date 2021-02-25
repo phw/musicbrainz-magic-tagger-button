@@ -2,7 +2,7 @@
   "name": "mb-auto-tagger-button",
   "version": "0.1.0",
   "description": "User script to automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running",
-  "main": "mb-auto-tagger-button.js",
+  "main": "mb-auto-tagger-button.user.js",
   "type": "git",
   "repository": {
     "url": "git+ssh://git@github.com/phw/musicbrainz-auto-tagger-button.git"
