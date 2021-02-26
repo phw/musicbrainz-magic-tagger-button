@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz auto tagger button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.3.0
+// @version       0.3.1
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @icon          https://staticbrainz.org/MB/mblookup-tagger-b8fe559.png
@@ -20,6 +20,7 @@
 
 const PICARD_URL = 'http://127.0.0.1'
 const PICARD_DEFAULT_PORT = 8000
+const PICARD_MAX_PORT = 8010
 
 function makeRequest (method, url) {
   return new Promise(function (resolve, reject) {
@@ -64,8 +65,7 @@ async function probeTagger (port) {
 }
 
 async function detectTaggerPort () {
-  for (let i = 0; i <= 20; i++) {
-    const port = PICARD_DEFAULT_PORT + i
+  for (let port = PICARD_DEFAULT_PORT; port <= PICARD_MAX_PORT; port++) {
     console.debug(`Probing port ${port}`)
     if (await probeTagger(port)) {
       return port
