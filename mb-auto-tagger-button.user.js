@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz auto tagger button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.2.0
+// @version       0.3.0
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @icon          https://staticbrainz.org/MB/mblookup-tagger-b8fe559.png
@@ -52,7 +52,7 @@ async function probeTagger (port) {
     const response = await makeRequest('GET', PICARD_URL + ':' + port)
     console.debug(response)
     const text = response.responseText || ''
-    if (text.match(/Nothing to see here/)) {
+    if (text.match(/MusicBrainz-Picard/) || text.match(/Nothing to see here/)) {
       return true
     } else {
       return false
