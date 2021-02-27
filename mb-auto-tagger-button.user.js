@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz auto tagger button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.3.1
+// @version       0.3.2
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @icon          https://staticbrainz.org/MB/mblookup-tagger-b8fe559.png
@@ -23,10 +23,10 @@ const PICARD_DEFAULT_PORT = 8000
 const PICARD_MAX_PORT = 8010
 
 function makeRequest (method, url) {
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     xhr.open(method, url)
-    xhr.onload = function () {
+    xhr.onload = () => {
       resolve({
         method: method,
         url: url,
@@ -36,7 +36,7 @@ function makeRequest (method, url) {
         responseText: xhr.responseText,
       })
     }
-    xhr.onerror = function () {
+    xhr.onerror = () => {
       reject({
         method: method,
         url: url,
