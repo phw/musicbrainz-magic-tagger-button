@@ -21,17 +21,22 @@ https://raw.githubusercontent.com/phw/musicbrainz-auto-tagger-button/main/mb-aut
 
 Some things to be aware off:
 
-- This has been tested only on latest Firefox with Greasemonkey and Violentmonkey. It might or might
-  not work on other browsers. The code assumes your browser supports modern JS features.
-- Actually this hasn’t been tested properly at all. It works here for me, but might not for you. For
-  now this is a proof of concept.
+- You should use Picard 2.6.0b1 or later. This user script will not work with earlier versions of
+  Picard when using Chromium based browsers (e.g. Google Chrome or Microsoft work). It currently
+  will work on Firefox even with older Picard versions, but this could change in the future.
+- This has been tested on latest versions of Firefox, Google Chrome and Microsoft Edge using
+  Greasemonkey, Violentmonkey and Tampermonkey. It might or might not work on other browsers or with
+  other user script managers. The code assumes your browser supports modern JS features.
+- I still consider this experimental and a proof of concept. It works for me, but might not for you.
+- It is recommended that you have configured Picard to use the default port 8000, but it has to be
+  one port between 8000 - 8010.
+- If for some obscure reason you have Picard running on a port outside of this port range it won’t
+  work, you’ll have to edit the script for this. Or just configure Picard to run on port 8000 again.
 - For detecting whether and on which port Picard is running this script performs HTTP GET requests
-  on localhost against the ports 8000 - 8020. If you have a local web server or anything else
+  on localhost against the above port range. If you have a local web server or anything else
   running on one of those ports better make sure it doesn’t do something unexpected. Proper software
   shouldn’t, but if you have setup a local webserver to delete all your files whenever you open
   https://localhost:8000 don’t come complain here.
-- If for some obscure reason you have Picard running on a port outside of this port range it won’t
-  work, you’ll have to edit the script for this. Or just configure Picard to run on port 8000 again.
 - Activating the tagger button requires an automatic page reload. The script tries to avoid page
   reloads unless necessary. Let me know if the reload happens in a situation where it causes issues.
 - Once the tagger button is displayed, it won’t go away even if you close Picard. I found no way to
