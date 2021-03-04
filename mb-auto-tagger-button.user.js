@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz auto tagger button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.3.2
+// @version       0.4.0
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @icon          https://staticbrainz.org/MB/mblookup-tagger-b8fe559.png
@@ -21,6 +21,10 @@
 const PICARD_URL = 'http://127.0.0.1'
 const PICARD_DEFAULT_PORT = 8000
 const PICARD_MAX_PORT = 8010
+
+const TAGGER_ERROR_MESSAGE = 'Loading this release or recording into MusicBrainz Picard failed.\nPlease make sure Picard is running and the browser integration is activated.'
+const TAGGER_ICON_SUCCESS = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAANCAMAAAADg7fkAAAAUVBMVEUAAAAzMzM/OzxDQ0NMSUpVVlhaV1hmZmZ2c3R7fHWEhX2Nj4WXmIyZmZmfoaShopOqq5isq6uvmv+zs566ubnDw6fMy6zMzMzW1dXj4+P///9p+Ql3AAAAhElEQVQoz42RUQ+CMAyEe0NBx+aGYNX9/x9qRyFkL9h7uDTdl+aWo1I1Ofov4T6XLrB/nquSEZ7ZQt4ws4lcMId+XEnSzWa0G20rlxMe13En62trOggJ9rHEoSXXUzodpEsZEcFwU3JmHzSnJjsOtznLhGz7uxSE+8tGlm8PW0eit6H3H3qWGo9r6lL+AAAAAElFTkSuQmCC'
+const TAGGER_ICON_ERROR = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAANCAMAAAADg7fkAAAAUVBMVEUAAAAzMzM/OzxDQ0NMSUpVVlhaV1hmZmZ2c3R7fHWEhX2Nj4WXmIyZmZmfoaShopOqq5isq6uzs566ubnDw6fMy6zMzMzW1dXj4+P/Zmb///8r7DMeAAAAh0lEQVQoz42RyQ6DMAxEM0BpCUkJi2mT///QJpgIq4fWI3k5PI3GsklFc2P+K3OvrnVk428V0sMSacgHFlKRKxbXjyeZ0xzFLV5bmU2Y8LyNJ8llvttBgqxP/l49o/Bk8vKcAjyc9BRehreaM1gncwqu4nz7jKC7PT8Iw6Yj07uH7kdZu+LvH+KRIrjjFXuTAAAAAElFTkSuQmCC'
 
 function makeRequest (method, url) {
   return new Promise((resolve, reject) => {
@@ -85,6 +89,39 @@ function findTaggerButton () {
   }
 }
 
+function setTaggerButtonStatus (button, icon, title) {
+  button.setAttribute('title', title)
+  const img = button.getElementsByTagName('img')[0]
+  img.setAttribute('src', icon)
+}
+
+function improveTaggerButtons () {
+  const taggerButtons = document.getElementsByClassName('tagger-icon')
+
+  for (const button of taggerButtons) {
+    const newButton = button.cloneNode(true)
+    button.parentNode.replaceChild(newButton, button)
+    newButton.addEventListener('click', async (event) => {
+      event.preventDefault()
+      const url = newButton.href
+      console.debug('Tagger button clicked', url)
+      try {
+        const response = await makeRequest('GET', url)
+        if (response.status >= 200 && response.status < 400) {
+          console.debug('Tagger request successful', response.responseText)
+          setTaggerButtonStatus(newButton, TAGGER_ICON_SUCCESS, response.responseText)
+        } else {
+          console.error('Tagger request was answered with an error', response)
+          setTaggerButtonStatus(newButton, TAGGER_ICON_ERROR, TAGGER_ERROR_MESSAGE)
+        }
+      } catch (reason) {
+        console.error('Tagger request error', reason)
+        setTaggerButtonStatus(newButton, TAGGER_ICON_ERROR, TAGGER_ERROR_MESSAGE)
+      }
+    })
+  }
+}
+
 function findCurrentlyUsedTaggerPort () {
   const url = new URL(document.location.href)
 
@@ -129,6 +166,7 @@ async function run () {
 
   if (currentPort && await probeTagger(currentPort)) {
     console.log(`Tagger button configured for port ${currentPort}.`)
+    improveTaggerButtons()
     return
   }
 
@@ -140,6 +178,7 @@ async function run () {
       reloadWithTaggerPort(taggerPort)
     } else {
       console.debug('Tagger button already active')
+      improveTaggerButtons()
     }
   } else {
     console.log('Could not find Picard listening for tagger button')
