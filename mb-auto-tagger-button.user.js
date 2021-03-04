@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz auto tagger button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.4.1
+// @version       0.4.2
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @icon          https://staticbrainz.org/MB/mblookup-tagger-b8fe559.png
@@ -18,7 +18,7 @@
 // @downloadURL   https://raw.githubusercontent.com/phw/musicbrainz-auto-tagger-button/main/mb-auto-tagger-button.user.js
 // ==/UserScript==
 
-const TAGGER_URL = 'http://127.0.0.1'
+const TAGGER_HOST = '127.0.0.1'
 const TAGGER_DEFAULT_PORT = 8000
 const TAGGER_MAX_PORT = 8010
 
@@ -72,7 +72,7 @@ function makeRequest (method, url) {
 
 async function probeTagger (port) {
   try {
-    const response = await makeRequest('GET', TAGGER_URL + ':' + port)
+    const response = await makeRequest('GET', `http://${TAGGER_HOST}:${port}`)
     debug(response)
     const text = response.responseText || ''
     if (text.match(/MusicBrainz-Picard/) || text.match(/Nothing to see here/)) {
@@ -181,9 +181,12 @@ async function run () {
 
   const currentPort = findCurrentlyUsedTaggerPort()
 
+  if (currentPort) {
+    improveTaggerButtons()
+  }
+
   if (currentPort && await probeTagger(currentPort)) {
     log(`Tagger button configured for port ${currentPort}.`)
-    improveTaggerButtons()
     return
   }
 
@@ -195,7 +198,6 @@ async function run () {
       reloadWithTaggerPort(taggerPort)
     } else {
       debug('Tagger button already active')
-      improveTaggerButtons()
     }
   } else {
     log('Could not find Picard listening for tagger button')
