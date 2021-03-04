@@ -18,9 +18,9 @@
 // @downloadURL   https://raw.githubusercontent.com/phw/musicbrainz-auto-tagger-button/main/mb-auto-tagger-button.user.js
 // ==/UserScript==
 
-const PICARD_URL = 'http://127.0.0.1'
-const PICARD_DEFAULT_PORT = 8000
-const PICARD_MAX_PORT = 8010
+const TAGGER_URL = 'http://127.0.0.1'
+const TAGGER_DEFAULT_PORT = 8000
+const TAGGER_MAX_PORT = 8010
 
 const TAGGER_ERROR_MESSAGE = 'Loading this release or recording into MusicBrainz Picard failed.\nPlease make sure Picard is running and the browser integration is activated.'
 const TAGGER_ICON_SUCCESS = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAANCAMAAAADg7fkAAAAUVBMVEUAAAAzMzM/OzxDQ0NMSUpVVlhaV1hmZmZ2c3R7fHWEhX2Nj4WXmIyZmZmfoaShopOqq5isq6uvmv+zs566ubnDw6fMy6zMzMzW1dXj4+P///9p+Ql3AAAAhElEQVQoz42RUQ+CMAyEe0NBx+aGYNX9/x9qRyFkL9h7uDTdl+aWo1I1Ofov4T6XLrB/nquSEZ7ZQt4ws4lcMId+XEnSzWa0G20rlxMe13En62trOggJ9rHEoSXXUzodpEsZEcFwU3JmHzSnJjsOtznLhGz7uxSE+8tGlm8PW0eit6H3H3qWGo9r6lL+AAAAAElFTkSuQmCC'
@@ -72,7 +72,7 @@ function makeRequest (method, url) {
 
 async function probeTagger (port) {
   try {
-    const response = await makeRequest('GET', PICARD_URL + ':' + port)
+    const response = await makeRequest('GET', TAGGER_URL + ':' + port)
     debug(response)
     const text = response.responseText || ''
     if (text.match(/MusicBrainz-Picard/) || text.match(/Nothing to see here/)) {
@@ -87,7 +87,7 @@ async function probeTagger (port) {
 }
 
 async function detectTaggerPort () {
-  for (let port = PICARD_DEFAULT_PORT; port <= PICARD_MAX_PORT; port++) {
+  for (let port = TAGGER_DEFAULT_PORT; port <= TAGGER_MAX_PORT; port++) {
     debug(`Probing port ${port}`)
     if (await probeTagger(port)) {
       return port
