@@ -24,7 +24,7 @@ The latest version of this script to install is available at:
 https://raw.githubusercontent.com/phw/musicbrainz-magic-tagger-button/main/mb-magic-tagger-button.user.js
 
 Alternatively you can get the script from [OpenUserJS](https://openuserjs.org/scripts/phw/MusicBrainz_Magic_Tagger_Button)
-or [Greasy Fork](https://greasyfork.org/de/scripts/422650-musicbrainz-auto-tagger-button).
+or [Greasy Fork](https://greasyfork.org/de/scripts/422670-musicbrainz-magic-tagger-button).
 
 
 ## Gotchas
