@@ -1,7 +1,8 @@
 # MusicBrainz Auto Tagger Button user script
 
 This is a browser user script to enable the green tagger button ![Open in tagger](https://staticbrainz.org/MB/mblookup-tagger-b8fe559.png)
-on [musicbrainz.org](https://musicbrainz.org), which is used to send a release to [MusicBrainz Picard](https://picard.musicbrainz.org).
+on [musicbrainz.org](https://musicbrainz.org), which is used to send a release or recording to
+[MusicBrainz Picard](https://picard.musicbrainz.org).
 
 It will detect whether Picard is running and will enable the tagger buttons if they are disabled. It
 will even auto detect the proper port on which Picard is listening.
@@ -32,7 +33,8 @@ Some things to be aware off:
   will work on Firefox even with older Picard versions, but this could change in the future.
 - This has been tested on latest versions of Firefox, Google Chrome, Microsoft Edge Opera and Vivaldi
   using Greasemonkey, Violentmonkey and Tampermonkey. It might or might not work on other browsers or
-  with other user script managers. The code assumes your browser supports modern JS features.
+  with other user script managers. The code assumes your browser supports modern JS features (at
+  least ES2017).
 - I still consider this experimental and a proof of concept. It works for me, but might not for you.
 - It is recommended that you have configured Picard to use the default port 8000, but it has to be
   one port between 8000 - 8010.
