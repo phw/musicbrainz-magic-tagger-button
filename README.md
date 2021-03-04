@@ -6,6 +6,9 @@ on [musicbrainz.org](https://musicbrainz.org), which is used to send a release t
 It will detect whether Picard is running and will enable the tagger buttons if they are disabled. It
 will even auto detect the proper port on which Picard is listening.
 
+In addition this script will improve the tagger buttons themselves. Instead of just being static images
+they will change after being clicked, depending on whether the browser integration worked or not.
+
 
 ## Installation
 
@@ -24,9 +27,9 @@ Some things to be aware off:
 - You should use Picard 2.6.0b1 or later. This user script will not work with earlier versions of
   Picard when using Chromium based browsers (e.g. Google Chrome or Microsoft work). It currently
   will work on Firefox even with older Picard versions, but this could change in the future.
-- This has been tested on latest versions of Firefox, Google Chrome and Microsoft Edge using
-  Greasemonkey, Violentmonkey and Tampermonkey. It might or might not work on other browsers or with
-  other user script managers. The code assumes your browser supports modern JS features.
+- This has been tested on latest versions of Firefox, Google Chrome, Microsoft Edge Opera and Vivaldi
+  using Greasemonkey, Violentmonkey and Tampermonkey. It might or might not work on other browsers or
+  with other user script managers. The code assumes your browser supports modern JS features.
 - I still consider this experimental and a proof of concept. It works for me, but might not for you.
 - It is recommended that you have configured Picard to use the default port 8000, but it has to be
   one port between 8000 - 8010.
