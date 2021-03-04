@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz auto tagger button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.4.0
+// @version       0.4.1
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @icon          https://staticbrainz.org/MB/mblookup-tagger-b8fe559.png
@@ -25,6 +25,24 @@ const PICARD_MAX_PORT = 8010
 const TAGGER_ERROR_MESSAGE = 'Loading this release or recording into MusicBrainz Picard failed.\nPlease make sure Picard is running and the browser integration is activated.'
 const TAGGER_ICON_SUCCESS = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAANCAMAAAADg7fkAAAAUVBMVEUAAAAzMzM/OzxDQ0NMSUpVVlhaV1hmZmZ2c3R7fHWEhX2Nj4WXmIyZmZmfoaShopOqq5isq6uvmv+zs566ubnDw6fMy6zMzMzW1dXj4+P///9p+Ql3AAAAhElEQVQoz42RUQ+CMAyEe0NBx+aGYNX9/x9qRyFkL9h7uDTdl+aWo1I1Ofov4T6XLrB/nquSEZ7ZQt4ws4lcMId+XEnSzWa0G20rlxMe13En62trOggJ9rHEoSXXUzodpEsZEcFwU3JmHzSnJjsOtznLhGz7uxSE+8tGlm8PW0eit6H3H3qWGo9r6lL+AAAAAElFTkSuQmCC'
 const TAGGER_ICON_ERROR = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAANCAMAAAADg7fkAAAAUVBMVEUAAAAzMzM/OzxDQ0NMSUpVVlhaV1hmZmZ2c3R7fHWEhX2Nj4WXmIyZmZmfoaShopOqq5isq6uzs566ubnDw6fMy6zMzMzW1dXj4+P/Zmb///8r7DMeAAAAh0lEQVQoz42RyQ6DMAxEM0BpCUkJi2mT///QJpgIq4fWI3k5PI3GsklFc2P+K3OvrnVk428V0sMSacgHFlKRKxbXjyeZ0xzFLV5bmU2Y8LyNJ8llvttBgqxP/l49o/Bk8vKcAjyc9BRehreaM1gncwqu4nz7jKC7PT8Iw6Yj07uH7kdZu+LvH+KRIrjjFXuTAAAAAElFTkSuQmCC'
+
+function logger (level, ...args) {
+  if (!console) {
+    return
+  }
+
+  let func = console.log
+  if (level && typeof console[level] === 'function') {
+    func = console[level]
+  }
+
+  func('[Auto Tagger Button]', ...args)
+}
+
+const debug = (...args) => logger('debug', ...args)
+const log = (...args) => logger('log', ...args)
+const warn = (...args) => logger('warn', ...args)
+const error = (...args) => logger('error', ...args)
 
 function makeRequest (method, url) {
   return new Promise((resolve, reject) => {
@@ -55,7 +73,7 @@ function makeRequest (method, url) {
 async function probeTagger (port) {
   try {
     const response = await makeRequest('GET', PICARD_URL + ':' + port)
-    console.debug(response)
+    debug(response)
     const text = response.responseText || ''
     if (text.match(/MusicBrainz-Picard/) || text.match(/Nothing to see here/)) {
       return true
@@ -63,14 +81,14 @@ async function probeTagger (port) {
       return false
     }
   } catch (reason) {
-    console.warn(reason)
+    warn(reason)
     return false
   }
 }
 
 async function detectTaggerPort () {
   for (let port = PICARD_DEFAULT_PORT; port <= PICARD_MAX_PORT; port++) {
-    console.debug(`Probing port ${port}`)
+    debug(`Probing port ${port}`)
     if (await probeTagger(port)) {
       return port
     }
@@ -104,18 +122,18 @@ function improveTaggerButtons () {
     newButton.addEventListener('click', async (event) => {
       event.preventDefault()
       const url = newButton.href
-      console.debug('Tagger button clicked', url)
+      debug('Tagger button clicked', url)
       try {
         const response = await makeRequest('GET', url)
         if (response.status >= 200 && response.status < 400) {
-          console.debug('Tagger request successful', response.responseText)
+          debug('Tagger request successful', response.responseText)
           setTaggerButtonStatus(newButton, TAGGER_ICON_SUCCESS, response.responseText)
         } else {
-          console.error('Tagger request was answered with an error', response)
+          error('Tagger request was answered with an error', response)
           setTaggerButtonStatus(newButton, TAGGER_ICON_ERROR, TAGGER_ERROR_MESSAGE)
         }
       } catch (reason) {
-        console.error('Tagger request error', reason)
+        error('Tagger request error', reason)
         setTaggerButtonStatus(newButton, TAGGER_ICON_ERROR, TAGGER_ERROR_MESSAGE)
       }
     })
@@ -139,7 +157,6 @@ function findCurrentlyUsedTaggerPort () {
 function reloadWithTaggerPort (port) {
   const url = new URL(document.location.href)
   url.searchParams.set('tport', port)
-  console.log(url)
   document.location.href = url
 }
 
@@ -148,7 +165,7 @@ function checkCurrentPageExcluded () {
 
   // Special handling for search pages
   if (url.pathname === '/search' && !['release', 'recording'].includes(url.searchParams.get('type'))) {
-    console.debug(`No tagger buttons on ${url.searchParams.get('type')} search page.`)
+    debug(`No tagger buttons on ${url.searchParams.get('type')} search page.`)
     return true
   }
 
@@ -156,32 +173,32 @@ function checkCurrentPageExcluded () {
 }
 
 async function run () {
-  console.log('MusicBrainz auto tagger button!')
-
   if (checkCurrentPageExcluded()) {
     return
   }
 
+  log('Initializing MusicBrainz auto tagger button!')
+
   const currentPort = findCurrentlyUsedTaggerPort()
 
   if (currentPort && await probeTagger(currentPort)) {
-    console.log(`Tagger button configured for port ${currentPort}.`)
+    log(`Tagger button configured for port ${currentPort}.`)
     improveTaggerButtons()
     return
   }
 
   const taggerPort = await detectTaggerPort()
   if (taggerPort) {
-    console.log(`Found Picard listening on port ${taggerPort}.`)
+    log(`Found Picard listening on port ${taggerPort}.`)
     if (currentPort !== taggerPort) {
-      console.log('Reloading to activate tagger button...')
+      log(`Reloading to activate tagger button on port ${taggerPort}...`)
       reloadWithTaggerPort(taggerPort)
     } else {
-      console.debug('Tagger button already active')
+      debug('Tagger button already active')
       improveTaggerButtons()
     }
   } else {
-    console.log('Could not find Picard listening for tagger button')
+    log('Could not find Picard listening for tagger button')
   }
 }
 
