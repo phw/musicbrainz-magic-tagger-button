@@ -1,4 +1,4 @@
-# MusicBrainz Auto Tagger Button user script
+# MusicBrainz Magic Tagger Button user script
 
 This is a browser user script to enable the green tagger button ![Open in tagger](https://staticbrainz.org/MB/mblookup-tagger-b8fe559.png)
 on [musicbrainz.org](https://musicbrainz.org), which is used to send a release or recording to
@@ -21,7 +21,7 @@ or [Violentmonkey](https://violentmonkey.github.io/)).
 
 The latest version of this script to install is available at:
 
-https://raw.githubusercontent.com/phw/musicbrainz-auto-tagger-button/main/mb-auto-tagger-button.user.js
+https://raw.githubusercontent.com/phw/musicbrainz-magic-tagger-button/main/mb-magic-tagger-button.user.js
 
 
 ## Gotchas
@@ -53,6 +53,6 @@ Some things to be aware off:
 
 ## License
 
-MusicBrainz Auto Tagger Button © 2021 Philipp Wolfer <ph.wolfer@gmail.com>
+MusicBrainz Magic Tagger Button © 2021 Philipp Wolfer <ph.wolfer@gmail.com>
 
 Published under the MIT license, see LICENSE for details.
