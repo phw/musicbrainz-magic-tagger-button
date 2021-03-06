@@ -38,6 +38,8 @@ Some things to be aware off:
   using Greasemonkey, Violentmonkey and Tampermonkey. It might or might not work on other browsers or
   with other user script managers. The code assumes your browser supports modern JS features (at
   least ES2017).
+- The user script does not work with Safari due to strict blocking of unencrypted connections even if
+  they are local.
 - I still consider this experimental and a proof of concept. It works for me, but might not for you.
 - It is recommended that you have configured Picard to use the default port 8000, but it has to be
   one port between 8000 - 8010.
