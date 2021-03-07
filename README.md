@@ -34,7 +34,7 @@ Some things to be aware off:
 - You should use Picard 2.6.0b1 or later. This user script will not work with earlier versions of
   Picard when using Chromium based browsers (e.g. Google Chrome or Microsoft work). It currently
   will work on Firefox even with older Picard versions, but this could change in the future.
-- This has been tested on latest versions of Firefox, Google Chrome, Microsoft Edge Opera and Vivaldi
+- This has been tested on latest versions of Firefox, Google Chrome, Microsoft Edge,README Opera and Vivaldi
   using Greasemonkey, Violentmonkey and Tampermonkey. It might or might not work on other browsers or
   with other user script managers. The code assumes your browser supports modern JS features (at
   least ES2017).
