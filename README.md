@@ -32,7 +32,7 @@ or [Greasy Fork](https://greasyfork.org/de/scripts/422670-musicbrainz-magic-tagg
 Some things to be aware off:
 
 - You should use Picard 2.6.0b1 or later. This user script will not work with earlier versions of
-  Picard when using Chromium based browsers (e.g. Google Chrome or Microsoft work). It currently
+  Picard when using Chromium based browsers (e.g. Google Chrome or Microsoft Edge). It currently
   will work on Firefox even with older Picard versions, but this could change in the future.
 - This has been tested on latest versions of Firefox, Google Chrome, Microsoft Edge, Opera and Vivaldi
   using Greasemonkey, Violentmonkey and Tampermonkey. It might or might not work on other browsers or
