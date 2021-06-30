@@ -23,7 +23,6 @@
 // @exclude       /^https://([.*].)?musicbrainz.org/series/.*/.*/
 // @grant         none
 // @grant         GM.xmlHttpRequest
-// @grant         GM_xmlhttpRequest
 // @inject-into   content
 // @noframes
 // @homepageURL   https://github.com/phw/musicbrainz-magic-tagger-button
@@ -60,9 +59,6 @@ let xmlHttpRequest
 if (typeof (GM) !== 'undefined' && GM.xmlHttpRequest) {
   debug('Using GM.xmlHttpRequest')
   xmlHttpRequest = GM.xmlHttpRequest
-} else if (typeof (GM_xmlhttpRequest) !== 'undefined') {
-  debug('Using GM_xmlhttpRequest')
-  xmlHttpRequest = GM_xmlhttpRequest
 } else {
   debug('Using XMLHttpRequest')
   xmlHttpRequest = function xmlHttpRequest (details) {
