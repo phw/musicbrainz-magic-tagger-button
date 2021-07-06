@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz Magic Tagger Button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.5.11
+// @version       0.6
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @license       MIT
@@ -104,8 +104,12 @@ async function detectTaggerPort () {
   }
 }
 
+function allTaggerButtons () {
+  return document.getElementsByClassName('tagger-icon')
+}
+
 function findTaggerButton () {
-  const button = document.getElementsByClassName('tagger-icon')[0]
+  const button = allTaggerButtons()[0]
   if (button && button.href) {
     const url = new URL(button.href)
     return {
@@ -123,7 +127,7 @@ function setTaggerButtonStatus (button, icon, title) {
 }
 
 function improveTaggerButtons () {
-  const taggerButtons = document.getElementsByClassName('tagger-icon')
+  const taggerButtons = allTaggerButtons()
 
   for (const button of taggerButtons) {
     const newButton = button.cloneNode(true)
@@ -149,6 +153,13 @@ function improveTaggerButtons () {
   }
 }
 
+function hideAllTaggerButtons () {
+  const taggerButtons = allTaggerButtons()
+  for (const button of taggerButtons) {
+    button.style.display = 'none'
+  }
+}
+
 function findCurrentlyUsedTaggerPort () {
   const url = new URL(document.location.href)
 
@@ -163,10 +174,26 @@ function findCurrentlyUsedTaggerPort () {
   }
 }
 
-function reloadWithTaggerPort (port) {
+function getCurrentUrlWithPort (port) {
   const url = new URL(document.location.href)
   url.searchParams.set('tport', port)
-  document.location.href = url
+  return url
+}
+
+function reloadWithTaggerPort (port) {
+  document.location.href = getCurrentUrlWithPort(port)
+}
+
+async function disableTaggerButtons () {
+  hideAllTaggerButtons()
+  // Perform a request in the background to clear the tport from session
+  const url = getCurrentUrlWithPort(0)
+  url.pathname = '/'
+  try {
+    await makeRequest('GET', url)
+  } catch (reason) {
+    warn(reason)
+  }
 }
 
 function checkCurrentPageExcluded () {
@@ -209,6 +236,10 @@ async function run () {
     }
   } else {
     log('Could not find Picard listening for tagger button')
+    if (currentPort) {
+      debug('Disable tagger buttons')
+      await disableTaggerButtons()
+    }
   }
 }
 

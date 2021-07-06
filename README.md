@@ -52,8 +52,6 @@ Some things to be aware off:
   https://localhost:8000 don’t come complain here.
 - Activating the tagger button requires an automatic page reload. The script tries to avoid page
   reloads unless necessary. Let me know if the reload happens in a situation where it causes issues.
-- Once the tagger button is displayed, it won’t go away even if you close Picard. I found no way to
-  tell MB.org to forget about the `tport` parameter again.
 
 
 ## License
