@@ -58,4 +58,4 @@ Some things to be aware off:
 
 MusicBrainz Magic Tagger Button © 2021 Philipp Wolfer <ph.wolfer@gmail.com>
 
-Published under the MIT license, see LICENSE for details.
+Published under the MIT license, see [LICENSE](./LICENSE) for details.

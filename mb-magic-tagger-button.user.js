@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz Magic Tagger Button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.6
+// @version       0.6.1
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @license       MIT
@@ -28,9 +28,40 @@
 // @downloadURL   https://raw.githubusercontent.com/phw/musicbrainz-magic-tagger-button/main/mb-magic-tagger-button.user.js
 // ==/UserScript==
 
-const TAGGER_HOST = '127.0.0.1'
+// You can change the default port below if you have running Picard on a
+// different port then the default 8000.
 const TAGGER_DEFAULT_PORT = 8000
+
+// As Picard can end up running on a higher port if the configured port is in
+// use, this script probes a range of ports up to TAGGER_MAX_PORT. You can
+// lower this value or even set it to TAGGER_DEFAULT_PORT to reduce the amount
+// of probing requests.
 const TAGGER_MAX_PORT = 8010
+
+// Usually Picard will listen on your local device only. You might want to
+// set this to a different IP address in your local network if Picard is
+// running on a different computer then your browser.
+const TAGGER_HOST = '127.0.0.1'
+
+// MusicBrainz Magic Tagger Button - Copyright (c) 2021 Philipp Wolfer
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
 
 const TAGGER_ERROR_MESSAGE = 'Loading this release or recording into MusicBrainz Picard failed.\nPlease make sure Picard is running and the browser integration is activated.'
 const TAGGER_ICON_SUCCESS = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAANCAMAAAADg7fkAAAAUVBMVEUAAAAzMzM/OzxDQ0NMSUpVVlhaV1hmZmZ2c3R7fHWEhX2Nj4WXmIyZmZmfoaShopOqq5isq6uvmv+zs566ubnDw6fMy6zMzMzW1dXj4+P///9p+Ql3AAAAhElEQVQoz42RUQ+CMAyEe0NBx+aGYNX9/x9qRyFkL9h7uDTdl+aWo1I1Ofov4T6XLrB/nquSEZ7ZQt4ws4lcMId+XEnSzWa0G20rlxMe13En62trOggJ9rHEoSXXUzodpEsZEcFwU3JmHzSnJjsOtznLhGz7uxSE+8tGlm8PW0eit6H3H3qWGo9r6lL+AAAAAElFTkSuQmCC'
