@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz Magic Tagger Button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.7.2
+// @version       0.7.3
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @license       MIT
@@ -150,11 +150,11 @@ async function detectTaggerPort () {
 }
 
 function allTaggerButtons () {
-  return document.getElementsByClassName('tagger-icon')
+  return document.querySelectorAll('a.tagger-icon')
 }
 
 function findTaggerButton () {
-  const button = allTaggerButtons()[0]
+  const button = document.querySelector('a.tagger-icon')
   if (button && button.href) {
     const url = new URL(button.href)
     return {
