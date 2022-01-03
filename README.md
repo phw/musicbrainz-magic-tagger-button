@@ -38,8 +38,10 @@ Some things to be aware off:
   using Greasemonkey, Violentmonkey and Tampermonkey. It might or might not work on other browsers or
   with other user script managers. The code assumes your browser supports modern JS features (at
   least ES2017).
-- The user script does not work with Safari due to strict blocking of unencrypted connections even if
-  they are local.
+- For Safari you need the [Userscripts](https://github.com/quoid/userscripts) extension version 4
+  (which requires macOS 12.0+) and version 0.7 of MusicBrainz Magic Tagger Button.
+  *The user script does not work in Safari with older versions of the Userscripts extension due
+  to strict blocking of unencrypted connections even if they are local.*
 - I still consider this experimental and a proof of concept. It works for me, but might not for you.
 - It is recommended that you have configured Picard to use the default port 8000, but it has to be
   one port between 8000 - 8010.
@@ -56,6 +58,6 @@ Some things to be aware off:
 
 ## License
 
-MusicBrainz Magic Tagger Button © 2021 Philipp Wolfer <ph.wolfer@gmail.com>
+MusicBrainz Magic Tagger Button © 2021-2022 Philipp Wolfer <ph.wolfer@gmail.com>
 
 Published under the MIT license, see [LICENSE](./LICENSE) for details.
