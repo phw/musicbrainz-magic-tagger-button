@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz Magic Tagger Button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.6.3
+// @version       0.7
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @license       MIT
@@ -21,7 +21,7 @@
 // @exclude       /^https://([.*].)?musicbrainz.org/collection/.*/.*/
 // @exclude       /^https://([.*].)?musicbrainz.org/release-group/.*/.*/
 // @exclude       /^https://([.*].)?musicbrainz.org/series/.*/.*/
-// @grant         none
+// @grant         GM.xmlHttpRequest
 // @inject-into   content
 // @noframes
 // @homepageURL   https://github.com/phw/musicbrainz-magic-tagger-button
@@ -85,28 +85,45 @@ const log = (...args) => logger('log', ...args)
 const warn = (...args) => logger('warn', ...args)
 const error = (...args) => logger('error', ...args)
 
+let xmlHttpRequest
+if (typeof (GM) !== 'undefined' && GM.xmlHttpRequest) {
+  debug('Using GM.xmlHttpRequest')
+  xmlHttpRequest = GM.xmlHttpRequest
+} else {
+  debug('Using XMLHttpRequest')
+  xmlHttpRequest = function xmlHttpRequest (details) {
+    const xhr = new XMLHttpRequest()
+    xhr.timeout = details.timeout || 0
+    xhr.open(details.method, details.url)
+    xhr.onload = details.onload.bind(null, xhr)
+    xhr.onerror = details.onerror.bind(null, xhr)
+    xhr.send()
+  }
+}
+
 function makeRequest (method, url) {
   return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest()
-    xhr.timeout = 200
-    xhr.open(method, url)
-    xhr.onload = () => {
+    const successHandler = (response) => {
       resolve({
         method: method,
         url: url,
-        status: xhr.status,
-        statusText: xhr.statusText,
-        response: xhr.response,
-        responseText: xhr.responseText,
+        status: response.status,
+        statusText: response.statusText,
+        responseText: response.responseText,
       })
     }
-    const errorHandler = () => {
-      const msg = `Request failed ${method} ${url}: ${xhr.status} ${xhr.statusText}`
+    const errorHandler = (response) => {
+      const msg = `Request failed ${method} ${url}: ${response.status} ${response.statusText}`
       reject(new Error(msg))
     }
-    xhr.onerror = errorHandler
-    xhr.ontimeout = errorHandler
-    xhr.send()
+    xmlHttpRequest({
+      method: method,
+      url: url,
+      timeout: 200,
+      onload: successHandler,
+      onerror: errorHandler,
+      ontimeout: errorHandler,
+    })
   })
 }
 
