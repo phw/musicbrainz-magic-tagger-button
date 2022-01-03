@@ -17,7 +17,6 @@
       "imports": "never",
       "exports": "never",
       "functions": "never"
-    }],
-    "prefer-promise-reject-errors": "off"
+    }]
   }
 }
