@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz Magic Tagger Button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.7
+// @version       0.7.1
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @license       MIT
@@ -26,6 +26,7 @@
 // @noframes
 // @homepageURL   https://github.com/phw/musicbrainz-magic-tagger-button
 // @downloadURL   https://raw.githubusercontent.com/phw/musicbrainz-magic-tagger-button/main/mb-magic-tagger-button.user.js
+// @updateURL     https://raw.githubusercontent.com/phw/musicbrainz-magic-tagger-button/main/mb-magic-tagger-button.user.js
 // ==/UserScript==
 
 // You can change the default port below if you have running Picard on a
@@ -43,7 +44,7 @@ const TAGGER_MAX_PORT = 8010
 // running on a different computer then your browser.
 const TAGGER_HOST = '127.0.0.1'
 
-// MusicBrainz Magic Tagger Button - Copyright (c) 2021 Philipp Wolfer
+// MusicBrainz Magic Tagger Button - Copyright (c) 2021-2022 Philipp Wolfer
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
