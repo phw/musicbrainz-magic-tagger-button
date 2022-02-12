@@ -1,0 +1,41 @@
+{
+    "manifest_version": 2,
+    "name": "MusicBrainz Magic Tagger Button",
+    "version": "0.7.3",
+    "icons": {
+        "48": "icons/48.png"
+    },
+    "description": "Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.",
+    "author": "Philipp Wolfer",
+    "permissions": [
+        "http://127.0.0.1/",
+        "https://*.musicbrainz.org/",
+        "webRequest"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.musicbrainz.org/cdtoc/*",
+                "https://*.musicbrainz.org/collection/*",
+                "https://*.musicbrainz.org/recording/*",
+                "https://*.musicbrainz.org/release-group/*",
+                "https://*.musicbrainz.org/release/*",
+                "https://*.musicbrainz.org/series/*",
+                "https://*.musicbrainz.org/taglookup",
+                "https://*.musicbrainz.org/search"
+            ],
+            "exclude_matches": [
+                "https://*.musicbrainz.org/release/add",
+                "https://*.musicbrainz.org/*/create",
+                "https://*.musicbrainz.org/*/*/edit",
+                "https://*.musicbrainz.org/cdtoc/*/*",
+                "https://*.musicbrainz.org/collection/*/*",
+                "https://*.musicbrainz.org/release-group/*/*",
+                "https://*.musicbrainz.org/series/*/*"
+            ],
+            "js": [
+                "extension.js"
+            ]
+        }
+    ]
+}

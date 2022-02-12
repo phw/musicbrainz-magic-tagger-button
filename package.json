@@ -23,6 +23,10 @@
     "standard": "^16.0.3"
   },
   "scripts": {
+    "build": "cp mb-magic-tagger-button.user.js webextension/extension.js && web-ext build --source-dir webextension --overwrite-dest",
     "test": "eslint \"*.js\""
+  },
+  "dependencies": {
+    "web-ext": "^6.7.0"
   }
 }
