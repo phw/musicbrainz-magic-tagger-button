@@ -179,7 +179,8 @@ function improveTaggerButtons () {
     button.parentNode.replaceChild(newButton, button)
     newButton.addEventListener('click', async (event) => {
       event.preventDefault()
-      const url = newButton.href
+      const url = new URL(newButton.href)
+      url.host = TAGGER_HOST
       debug('Tagger button clicked', url)
       try {
         const response = await makeRequest('GET', url)
