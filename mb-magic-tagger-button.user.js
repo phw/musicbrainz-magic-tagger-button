@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz Magic Tagger Button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.7.3
+// @version       0.7.4
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @license       MIT
@@ -179,10 +179,10 @@ function improveTaggerButtons () {
     button.parentNode.replaceChild(newButton, button)
     newButton.addEventListener('click', async (event) => {
       event.preventDefault()
-      const url = new URL(newButton.href)
-      url.host = TAGGER_HOST
-      debug('Tagger button clicked', url)
       try {
+        const url = new URL(newButton.href)
+        url.host = TAGGER_HOST
+        debug('Tagger button clicked', url)
         const response = await makeRequest('GET', url)
         if (response.status >= 200 && response.status < 400) {
           debug('Tagger request successful', response.responseText)
