@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz Magic Tagger Button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.7.6
+// @version       0.7.7
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @license       MIT
@@ -14,13 +14,13 @@
 // @match         https://*.musicbrainz.org/series/*
 // @match         https://*.musicbrainz.org/taglookup
 // @match         https://*.musicbrainz.org/search
-// @exclude       /^https://([.*].)?musicbrainz.org/release/add/
-// @exclude       /^https://([.*].)?musicbrainz.org/.*/create/
-// @exclude       /^https://([.*].)?musicbrainz.org/.*/.*/edit/
-// @exclude       /^https://([.*].)?musicbrainz.org/cdtoc/.*/.*/
-// @exclude       /^https://([.*].)?musicbrainz.org/collection/.*/.*/
-// @exclude       /^https://([.*].)?musicbrainz.org/release-group/.*/.*/
-// @exclude       /^https://([.*].)?musicbrainz.org/series/.*/.*/
+// @exclude       /^https://(.*\.)?musicbrainz.org/release/add/
+// @exclude       /^https://(.*\.)?musicbrainz.org/.*/create/
+// @exclude       /^https://(.*\.)?musicbrainz.org/.*/.*/edit/
+// @exclude       /^https://(.*\.)?musicbrainz.org/cdtoc/.*/.*/
+// @exclude       /^https://(.*\.)?musicbrainz.org/collection/.*/.*/
+// @exclude       /^https://(.*\.)?musicbrainz.org/release-group/.*/.*/
+// @exclude       /^https://(.*\.)?musicbrainz.org/series/.*/.*/
 // @grant         GM.xmlHttpRequest
 // @connect       127.0.0.1
 // @inject-into   content
