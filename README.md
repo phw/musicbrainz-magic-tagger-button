@@ -10,8 +10,9 @@ will even auto detect the proper port on which Picard is listening.
 In addition this script will improve the tagger buttons themselves. Instead of just being static images
 they will change after being clicked, depending on whether the browser integration worked or not.
 
-**Important:** To use this script in Chromium based browsers you must use MusicBrainz Picard 2.6.0b1 or later.
-  In Firefox it works also with earlier versions of Picard, but using Picard 2.6 or later is still recommended.
+> [!IMPORTANT]
+> To use this script in Chromium based browsers you must use MusicBrainz Picard 2.6.0b1 or later.
+> In Firefox it works also with earlier versions of Picard, but using Picard 2.6 or later is still recommended.
 
 
 ## Installation
