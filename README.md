@@ -10,21 +10,26 @@ will even auto detect the proper port on which Picard is listening.
 In addition this script will improve the tagger buttons themselves. Instead of just being static images
 they will change after being clicked, depending on whether the browser integration worked or not.
 
-> [!IMPORTANT]
-> To use this script in Chromium based browsers you must use MusicBrainz Picard 2.6.0b1 or later.
-> In Firefox it works also with earlier versions of Picard, but using Picard 2.6 or later is still recommended.
-
-
 ## Installation
 
-Install this script with your favorite user script manager (e.g. [Greasemonkey](https://www.greasespot.net/)
-or [Violentmonkey](https://violentmonkey.github.io/)).
+Install this script with your favorite user script manager (e.g. [Greasemonkey](https://www.greasespot.net/),
+[Violentmonkey](https://violentmonkey.github.io/) or for Safari [Userscripts](https://github.com/quoid/userscripts)).
+
+> [!IMPORTANT]
+> For Safari you need the [Userscripts](https://github.com/quoid/userscripts) extension version 4
+> (which requires macOS 12.0+).
+> *The user script does not work in Safari with older versions of the Userscripts extension due
+> to strict blocking of unencrypted connections even if they are local.*
 
 The latest version of this script to install is available at:
 
 https://raw.githubusercontent.com/phw/musicbrainz-magic-tagger-button/main/mb-magic-tagger-button.user.js
 
 Alternatively you can get the script from [Greasy Fork](https://greasyfork.org/de/scripts/422670-musicbrainz-magic-tagger-button).
+
+> [!IMPORTANT]
+> To use this script in Chromium based browsers you must use MusicBrainz Picard 2.6.0b1 or later.
+> In Firefox it works also with earlier versions of Picard, but using Picard 2.6 or later is still recommended.
 
 
 ## Gotchas
