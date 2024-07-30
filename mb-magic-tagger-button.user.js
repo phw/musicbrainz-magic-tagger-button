@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz Magic Tagger Button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.7.9
+// @version       0.7.10
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @license       MIT
@@ -15,13 +15,22 @@
 // @match         https://*.musicbrainz.org/taglookup
 // @match         https://*.musicbrainz.org/search
 // @match         https://*.musicbrainz.org/artist/*/releases
-// @exclude       /^https://(.*\.)?musicbrainz.org/release/add/
-// @exclude       /^https://(.*\.)?musicbrainz.org/.*/create/
-// @exclude       /^https://(.*\.)?musicbrainz.org/.*/.*/edit/
-// @exclude       /^https://(.*\.)?musicbrainz.org/cdtoc/.*/.*/
-// @exclude       /^https://(.*\.)?musicbrainz.org/collection/.*/.*/
-// @exclude       /^https://(.*\.)?musicbrainz.org/release-group/.*/.*/
-// @exclude       /^https://(.*\.)?musicbrainz.org/series/.*/.*/
+// @match         https://*.musicbrainz.eu/cdtoc/*
+// @match         https://*.musicbrainz.eu/collection/*
+// @match         https://*.musicbrainz.eu/recording/*
+// @match         https://*.musicbrainz.eu/release-group/*
+// @match         https://*.musicbrainz.eu/release/*
+// @match         https://*.musicbrainz.eu/series/*
+// @match         https://*.musicbrainz.eu/taglookup
+// @match         https://*.musicbrainz.eu/search
+// @match         https://*.musicbrainz.eu/artist/*/releases
+// @exclude       /^https://(.*\.)?musicbrainz\.(org|eu)/release/add/
+// @exclude       /^https://(.*\.)?musicbrainz\.(org|eu)/.*/create/
+// @exclude       /^https://(.*\.)?musicbrainz\.(org|eu)/.*/.*/edit/
+// @exclude       /^https://(.*\.)?musicbrainz\.(org|eu)/cdtoc/.*/.*/
+// @exclude       /^https://(.*\.)?musicbrainz\.(org|eu)/collection/.*/.*/
+// @exclude       /^https://(.*\.)?musicbrainz\.(org|eu)/release-group/.*/.*/
+// @exclude       /^https://(.*\.)?musicbrainz\.(org|eu)/series/.*/.*/
 // @grant         GM.xmlHttpRequest
 // @connect       127.0.0.1
 // @inject-into   content
