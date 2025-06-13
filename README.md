@@ -1,6 +1,6 @@
 # MusicBrainz Magic Tagger Button user script
 
-This is a browser user script to enable the green tagger button ![Open in tagger](https://staticbrainz.org/MB/mblookup-tagger-b8fe559.png)
+This is a browser user script to enable the green tagger button ![Open in tagger](https://raw.githubusercontent.com/phw/musicbrainz-magic-tagger-button/refs/heads/main/resources/mblookup-tagger-default.png)
 on [musicbrainz.org](https://musicbrainz.org), which is used to send a release or recording to
 [MusicBrainz Picard](https://picard.musicbrainz.org).
 
