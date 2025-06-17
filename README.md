@@ -10,6 +10,12 @@ will even auto detect the proper port on which Picard is listening.
 In addition this script will improve the tagger buttons themselves. Instead of just being static images
 they will change after being clicked, depending on whether the browser integration worked or not.
 
+- ![Loaded](https://raw.githubusercontent.com/phw/musicbrainz-magic-tagger-button/refs/heads/main/resources/mblookup-tagger-loaded.png) The release was successfully loaded into Picard. Check the rightmost pane in the
+  Picard window for the release.
+- ![Error](https://raw.githubusercontent.com/phw/musicbrainz-magic-tagger-button/refs/heads/main/resources/mblookup-tagger-error.png) An error occurred when sending the release to Picard. Picard might not be running
+  or the browser integration is turned off. Hover over the icon to see more details about the error in
+  the tooltip.
+
 ## Installation
 
 Install this script with your favorite user script manager (e.g. [Greasemonkey](https://www.greasespot.net/),
@@ -63,6 +69,6 @@ Some things to be aware off:
 
 ## License
 
-MusicBrainz Magic Tagger Button © 2021-2023 Philipp Wolfer <ph.wolfer@gmail.com>
+MusicBrainz Magic Tagger Button © 2021-2025 Philipp Wolfer <ph.wolfer@gmail.com>
 
 Published under the MIT license, see [LICENSE](./LICENSE) for details.
