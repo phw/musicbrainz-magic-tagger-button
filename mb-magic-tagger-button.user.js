@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          MusicBrainz Magic Tagger Button
 // @description   Automatically enable the green tagger button on MusicBrainz.org depending on whether Picard is running.
-// @version       0.7.12
+// @version       0.7.13
 // @author        Philipp Wolfer
 // @namespace     https://uploadedlobster.com
 // @license       MIT
@@ -117,8 +117,8 @@ function makeRequest (method, url) {
   return new Promise((resolve, reject) => {
     const successHandler = (response) => {
       resolve({
-        method: method,
-        url: url,
+        method,
+        url,
         status: response.status,
         statusText: response.statusText,
         responseText: response.responseText,
@@ -129,8 +129,8 @@ function makeRequest (method, url) {
       reject(new Error(msg))
     }
     xmlHttpRequest({
-      method: method,
-      url: url,
+      method,
+      url,
       timeout: 200,
       onload: successHandler,
       onerror: errorHandler,
