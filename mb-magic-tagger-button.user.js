@@ -35,6 +35,7 @@
 // @connect       127.0.0.1
 // @inject-into   content
 // @noframes
+// @homepage      https://github.com/phw/musicbrainz-magic-tagger-button
 // @homepageURL   https://github.com/phw/musicbrainz-magic-tagger-button
 // @downloadURL   https://raw.githubusercontent.com/phw/musicbrainz-magic-tagger-button/main/mb-magic-tagger-button.user.js
 // @updateURL     https://raw.githubusercontent.com/phw/musicbrainz-magic-tagger-button/main/mb-magic-tagger-button.user.js

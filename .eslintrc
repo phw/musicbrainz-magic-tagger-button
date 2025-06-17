@@ -5,7 +5,8 @@
     "greasemonkey": true
   },
   "extends": [
-    "standard"
+    "standard",
+    "plugin:userscripts/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 8
@@ -17,6 +18,10 @@
       "imports": "never",
       "exports": "never",
       "functions": "never"
+    }],
+    "userscripts/align-attributes": ["error", 3],
+    "userscripts/compat-grant": ["error", {
+      "requireAllCompatible": true
     }]
   }
 }
